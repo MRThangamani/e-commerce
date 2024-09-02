@@ -6,7 +6,7 @@ exports.authMiddleware = async (req, res, next) => {
   if (!token) return res.status(401).json({ error: 'No token provided' });
 
   try {
-    const decoded = jwt.verify(token, 'your_jwt_secret');
+    const decoded = jwt.verify(token, 'eCommerce');
     req.user = await User.findById(decoded.id);
     next();
   } catch (err) {

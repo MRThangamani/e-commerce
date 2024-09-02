@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const connectDB = require('./config/db');
+const cors = require('cors');
+
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
@@ -14,6 +16,7 @@ var app = express();
 
 // Connect to the database
 connectDB();
+app.use(cors());
 
 // Middleware
 app.use(express.json());
