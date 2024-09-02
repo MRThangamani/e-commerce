@@ -1,34 +1,19 @@
 const Cart = require('../models/Cart');
-const Product = require('../models/Product');
-const mongoose = require('mongoose'); // Ensure mongoose is required
 
 exports.addToCart = async (req, res) => {
   const { productId, quantity } = req.body;
   const userId = req.user.id;
-
-  console.log(productId)
-  // if (!mongoose.Types.ObjectId.isValid(productId)) {
-  //   return res.status(400).json({ error: 'Invalid productId' });
-  // }
-
   try {
-    // Convert productId to ObjectId
     const productObjectId = productId;
-
     let cart = await Cart.findOne({ userId });
-
     if (!cart) {
       cart = new Cart({ userId, items: [] });
     }
-
-    // Find index of the item in the cart
     const itemIndex = cart.items.findIndex(item => item.productId.equals(productObjectId));
 
     if (itemIndex > -1) {
-      // Item exists, update quantity
       cart.items[itemIndex].quantity += quantity;
     } else {
-      // Item does not exist, add new item
       cart.items.push({ productId: productObjectId, quantity });
     }
 
@@ -48,7 +33,6 @@ exports.getCart = async (req, res) => {
   }
 };
 
-// Update quantity
 exports.updateCartItem = async (req, res) => {
   const { productId, quantity } = req.body;
   const userId = req.user.id;
@@ -76,7 +60,6 @@ exports.updateCartItem = async (req, res) => {
   }
 };
 
-// Remove item from cart
 exports.removeCartItem = async (req, res) => {
   const { productId } = req.body;
   const userId = req.user.id;

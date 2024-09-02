@@ -1,35 +1,28 @@
 const Order = require('../models/Order');
 const Cart = require('../models/Cart');
-const Product = require('../models/Product');
 
 exports.createOrder = async (req, res) => {
   const { shippingAddress, paymentMethod } = req.body;
   const userId = req.user.id;
   
   try {
-    // Fetch the user's cart
     const cart = await Cart.findOne({ userId }).populate('items.productId');
     if (!cart) return res.status(404).json({ error: 'Cart not found' });
 
-    // Calculate total amount
-    const totalAmount = cart.items.reduce((total, item) => {
+      const totalAmount = cart.items.reduce((total, item) => {
       const price = parseFloat(item.productId.selling_price);
       const quantity = parseInt(item.quantity, 10);
       
-      // Validate price and quantity
       if (isNaN(price) || isNaN(quantity)) {
         throw new Error('Invalid price or quantity in cart');
       }
-
       return total + (price * quantity);
     }, 0);
 
-    // Ensure totalAmount is a valid number
     if (isNaN(totalAmount)) {
       throw new Error('Total amount calculation failed');
     }
 
-    // Create a new order
     const order = new Order({
       userId,
       items: cart.items.map(item => ({
@@ -43,13 +36,11 @@ exports.createOrder = async (req, res) => {
     });
 
     await order.save();
-
-    // Clear the cart
     await Cart.deleteOne({ userId });
 
     res.json(order);
   } catch (error) {
-    console.error('Error creating order:', error); // Debugging output
+    console.error('Error creating order:', error); 
     res.status(500).json({ error: error.message });
   }
 };
