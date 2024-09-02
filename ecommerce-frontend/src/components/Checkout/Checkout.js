@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Checkout.css';
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const CheckoutPage = () => {
   const [cart, setCart] = useState([]);
@@ -14,7 +15,7 @@ const CheckoutPage = () => {
   const [authToken, setAuthToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/cart')
+    axios.get(`${apiUrl}/api/cart`)
       .then(response => {
         const cartItems = response.data.items;
         setCart(cartItems);
@@ -33,7 +34,7 @@ const CheckoutPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/orders/checkout', {
+    axios.post(`${apiUrl}/api/orders/checkout`, {
       shippingAddress,
       paymentMethod: 'Cash' 
     },
@@ -54,7 +55,6 @@ const CheckoutPage = () => {
       <header>
         <h1>Checkout</h1>
         <nav>
-          {/* Navigation Menu */}
         </nav>
       </header>
 

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -6,7 +8,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/admin/users', {
+        const response = await axios.get(`${apiUrl}/api/admin/users`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },

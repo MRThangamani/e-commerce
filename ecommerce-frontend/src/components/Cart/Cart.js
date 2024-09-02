@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Cart.css'; 
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const CartPage = () => {
   const [cart, setCart] = useState(null);
   const [authToken, setAuthToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/cart',{
+    axios.get(`${apiUrl}/api/cart`,{
       headers: {
         'Authorization': `Bearer ${authToken}`
       }
@@ -20,7 +21,7 @@ const CartPage = () => {
 
   const handleQuantityChange = (productId, quantity) => {
     console.log(productId,quantity)
-    axios.post('http://localhost:5000/api/cart/update', { productId, quantity },{
+    axios.post(`${apiUrl}/api/cart/update`, { productId, quantity },{
       headers: {
         'Authorization': `Bearer ${authToken}`
       }
@@ -30,7 +31,7 @@ const CartPage = () => {
   };
 
   const handleRemoveItem = (productId) => {
-    axios.post('http://localhost:5000/api/cart/remove', { productId },{
+    axios.post(`${apiUrl}/api/cart/remove`, { productId },{
       headers: {
         'Authorization': `Bearer ${authToken}`
       }
@@ -48,7 +49,6 @@ const CartPage = () => {
       <header>
         <h1>Shopping Cart</h1>
         <nav>
-          {/* Navigation Menu */}
         </nav>
       </header>
 

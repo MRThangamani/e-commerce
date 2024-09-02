@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const OrderSummary = () => {
   const [orders, setOrders] = useState([]);
@@ -8,7 +9,7 @@ const OrderSummary = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/orders/summary', {
+        const response = await fetch(`${apiUrl}/api/orders/summary`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },

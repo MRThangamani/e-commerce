@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import { CartProvider } from './context/CartContext';
 import ProductList from './components/Product/ProductList';
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
@@ -13,7 +12,6 @@ import Signup from './components/Auth/Signup';
 function App() {
   return (
     <AuthProvider>
-      <CartProvider>
           <Routes>
             <Route path="/product" element={<ProductList />} />
             <Route path="/cart" element={<Cart />} />
@@ -23,7 +21,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Signup />} />
           </Routes>
-      </CartProvider>
     </AuthProvider>
   );
 }

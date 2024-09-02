@@ -1,8 +1,8 @@
-// src/components/ProductList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductItem from './ProductItem';
 import './Product.css'; 
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -11,10 +11,10 @@ const ProductList = () => {
 
   // Filter state
   const [searchTerm, setSearchTerm] = useState('');
-  const [priceRange, setPriceRange] = useState([0, 1000]); // Example range [min, max]
+  const [priceRange, setPriceRange] = useState([0, 1000]); 
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/products')
+    axios.get(`${apiUrl}/api/products`)
       .then(response => setProducts(response.data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);
@@ -25,7 +25,7 @@ const ProductList = () => {
       return;
     }
 
-    axios.post('http://localhost:5000/api/cart/add', {
+    axios.post(`${apiUrl}/api/cart/add`, {
       productId: product.id,
       quantity: 1
     }, {

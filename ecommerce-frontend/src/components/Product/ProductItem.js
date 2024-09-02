@@ -1,4 +1,3 @@
-// src/components/ProductItem.js
 import React from 'react';
 
 const ProductItem = ({ product, addToCart }) => {
