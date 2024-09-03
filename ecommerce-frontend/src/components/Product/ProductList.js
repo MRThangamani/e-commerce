@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductItem from './ProductItem';
 import './Product.css'; 
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const ProductList = () => {
@@ -12,16 +15,19 @@ const ProductList = () => {
   // Filter state
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState([0, 1000]); 
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     axios.get(`${apiUrl}/api/products`)
-      .then(response => setProducts(response.data))
-      .catch(error => console.error('Error fetching products:', error));
+      .then(response => {
+        setProducts(response.data.products)})
+      .catch(error => toast.error(error));
   }, []);
 
   const addToCart = (product) => {
     if (!authToken) {
-      alert('You must be logged in to add items to your cart.');
+      toast.error('You must be logged in to add items to your cart.'); 
       return;
     }
 
@@ -39,10 +45,11 @@ const ProductList = () => {
           const cart = JSON.parse(localStorage.getItem('cart')) || [];
           cart.push({ ...product, quantity: 1 });
           localStorage.setItem('cart', JSON.stringify(cart));
-          alert('Item added to cart!');
+          toast.success(response.data.message); 
+          navigate('/cart')
         }
       })
-      .catch(error => console.error('Error adding to cart:', error));
+      .catch(error => toast.error(error));
   };
 
   // Filter products based on the criteria
@@ -97,6 +104,7 @@ const ProductList = () => {
           />
         ))}
       </div>
+      <ToastContainer /> 
     </div>
   );
 };

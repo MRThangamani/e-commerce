@@ -8,10 +8,12 @@ import OrderSummary from './components/Orders/OrderSummary';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
+import Header from './components/Header/Header';
 
 function App() {
   return (
     <AuthProvider>
+            <Header />
           <Routes>
             <Route path="/product" element={<ProductList />} />
             <Route path="/cart" element={<Cart />} />

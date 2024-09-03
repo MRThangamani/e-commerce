@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { ToastContainer, toast } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
 import './Signup.css';
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required'),
@@ -20,7 +21,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (values, { setSubmitting }) => {
-    fetch('/api/auth/signup', {
+    fetch(`${apiUrl}/api/auth/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values),

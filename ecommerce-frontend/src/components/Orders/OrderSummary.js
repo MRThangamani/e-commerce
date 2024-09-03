@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const OrderSummary = () => {
@@ -15,9 +17,9 @@ const OrderSummary = () => {
           },
         });
         const data = await response.json();
-        setOrders(data);
+        setOrders(data.order);
       } catch (error) {
-        console.error(error);
+        toast.error(error)
       }
     };
 
@@ -30,15 +32,17 @@ const OrderSummary = () => {
       {orders.length === 0 ? (
         <p>No orders found</p>
       ) : (
-        orders.map((order) => (
+        orders?.map((order) => (
           <div key={order._id} className="order">
             <h4>Order ID: {order._id}</h4>
             <p>Total Amount: ${order.totalAmount}</p>
-            <p>Address: {order.address}</p>
+            <p>Address Details: <p>Street : {order.shippingAddress.street}</p> <p>City : {order.shippingAddress.city}</p>
+            <p>State : {order.shippingAddress.state}</p><p>Zip : {order.shippingAddress.zip}</p></p>
             <p>Payment Method: {order.paymentMethod}</p>
           </div>
         ))
       )}
+      <ToastContainer /> 
     </div>
   );
 };
