@@ -17,7 +17,7 @@ const OrderSchema = new mongoose.Schema({
   paymentMethod: { type: String, default: 'cash' },
   createdAt: { type: Date, default: Date.now },
   estimatedDeliveryDate: Date,
-  orderNumber: { type: String, unique: true }
+  orderNumber: { type: String}
 });
 
 module.exports = mongoose.model('Order', OrderSchema);

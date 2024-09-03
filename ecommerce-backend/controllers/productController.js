@@ -11,7 +11,7 @@ exports.getProducts = async (req, res) => {
     }
     try {
       const products = JSON.parse(data);
-      res.json(products);
+      res.status(200).json({success:true, products:products, message:"Protect List"});
     } catch (parseError) {
       console.error('Error parsing the products file:', parseError);
       res.status(500).json({ error: 'Failed to parse products' });

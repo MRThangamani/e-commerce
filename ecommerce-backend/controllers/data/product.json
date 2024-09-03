@@ -3,7 +3,7 @@
       "id": "1",
       "name": "Wireless Headphones",
       "description": "High-quality wireless headphones with noise cancellation.",
-      "image": "https://example.com/images/wireless-headphones.jpg",
+      "image": "/images/headphone.jpg",
       "original_price": 150.00,
       "discount_price": 120.00,
       "selling_price": 130.00,
@@ -15,7 +15,7 @@
       "id": "2",
       "name": "Smartphone XYZ",
       "description": "Latest smartphone with high-resolution camera and fast processor.",
-      "image": "https://example.com/images/smartphone-xyz.jpg",
+      "image": "/images/smartphone.jpg",
       "original_price": 799.00,
       "discount_price": 749.00,
       "selling_price": 779.00,
@@ -27,7 +27,7 @@
       "id": "3",
       "name": "Bluetooth Speaker",
       "description": "Portable Bluetooth speaker with excellent sound quality.",
-      "image": "https://example.com/images/bluetooth-speaker.jpg",
+      "image": "/images/bluetoothspeaker.jpg",
       "original_price": 80.00,
       "discount_price": 65.00,
       "selling_price": 70.00,
@@ -39,25 +39,13 @@
       "id": "4",
       "name": "Smartwatch Pro",
       "description": "Advanced smartwatch with fitness tracking features.",
-      "image": "https://example.com/images/smartwatch-pro.jpg",
+      "image": "/images/smartwatch.jpg",
       "original_price": 250.00,
       "discount_price": 220.00,
       "selling_price": 230.00,
       "quantity": 40,
       "uom": "Piece",
       "hsn_code": "8517"
-    },
-    {
-      "id": "5",
-      "name": "Laptop ABC",
-      "description": "High-performance laptop with latest generation processor and ample storage.",
-      "image": "https://example.com/images/laptop-abc.jpg",
-      "original_price": 1200.00,
-      "discount_price": 1150.00,
-      "selling_price": 1180.00,
-      "quantity": 20,
-      "uom": "Piece",
-      "hsn_code": "8471"
     }
   ]
   
